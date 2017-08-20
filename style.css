@@ -1,0 +1,106 @@
+html,body,.container {
+    height:100%;
+}
+.container {
+    display:table;
+    width: 100%;
+    margin-top: -50px;
+    padding: 50px 0 0 0; /*set left/right padding according to needs*/
+    box-sizing: border-box;
+}
+header {
+    background: green;
+    height: 50px;
+}
+
+.row {
+    height: 100%;
+    display: table-row;
+}
+
+.col-md-3 {   
+    background: pink;
+}
+.col-md-9 {
+    background: yellow;  	
+}
+
+.row .no-float {
+  display: table-cell;
+  float: none;
+}
+
+#list {
+    width: 300px;
+    margin: 0px;
+    padding: 0px;
+    max-width: 300px;
+    min-width: 300px;
+    display: table-cell;
+    border: 2px solid red;
+}
+
+#contentdiv {
+    border: 2px solid blue;
+}
+
+header {
+    border: 2px solid purple;
+}
+
+#noteitems {
+    width: 100%;
+    text-align: center;
+}
+
+.active-note {
+    background: #cecece;
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none;
+}
+
+.note {
+    cursor: pointer;
+}
+
+#notecontent {
+    display: block;
+    background: none;
+    border: none;
+    position: absolute;
+    border: 2px solid aqua;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.notetitleinp {
+    width: 100%;
+    text-align: center;
+    padding: 0px 0px 5px;
+    margin: 0px;
+    line-height: 16px;
+   
+    cursor: pointer;
+}
+
+.active-note-edit {
+     background: oldlace;
+     cursor: initial;
+}
+
+
+td p {
+    margin: 0px 0px 5px;
+}
+
+@media (min-width: 992px) {
+    .col-md-9 {
+        width: initial;
+    }
+}
