@@ -17,7 +17,7 @@
 <button ng-click="addNote()">Add Note</button>
 <button id="delete" ng-show="notes.length > 0" ng-click="removeNote()" ng-cloak>Delete Note</button>
 <button id="delete" ng-show="notes.length > 0" ng-click="editNote()" ng-cloak>Edit Note</button>
-<button id="delete" ng-show="editmode" ng-click="saveNote()" ng-cloak>Save Note</button>
+<button id="delete" ng-show="editmode" ng-click="updateNote()" ng-cloak>Save Note</button>
 </header>
 <div class="container">
     <div class="row">
@@ -27,7 +27,8 @@
         			<td ng-form>
                 <!--<p class="note" ng-model="note.title" ng-click="setCurrentNote($index)" ng-class="{'active-note': note._id == notes[curnoteindex]._id}" ng-hide="editmode && note._id == notes[curnoteindex]._id"></p>-->
                 <!-- <input type="text" class="notetitleinp" ng-model="note.title" ng-show="editmode && note._id == notes[curnoteindex]._id"></input> -->
-                <input type="text" class="notetitleinp" ng-click="setCurrentNote($index)" ng-readonly="!editmode" ng-model="note.title" ng-class="{'active-note': note._id == notes[curnoteindex]._id && !editmode, 'active-note-edit': note._id == notes[curnoteindex]._id && editmode}"></input>
+                
+                <input type="text" class="notetitleinp" ng-click="setCurrentNote($index)" ng-readonly="!editmode" ng-model="note.title" ng-class="{'active-note': note._id == notes[curnoteindex]._id && !editmode, 'active-note-edit': note._id == notes[curnoteindex]._id && editmode}" required></input>
 
 
               </td>
@@ -35,7 +36,7 @@
         	</table>
         </div>
         <div id="contentdiv" class="col-md-9 no-float">
-          <textarea id="notecontent" ng-readonly="!editmode" ng-model="notes[curnoteindex].content"></textarea>
+          <textarea id="notecontent" ng-readonly="!editmode" ng-model="notes[curnoteindex].content" placeholder="Insert content here..."></textarea>
         </div>
     </div>
 </div>

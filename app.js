@@ -3,21 +3,30 @@ var myApp = angular.module("NoteApp", []);
 myApp.controller('NoteController', ["$scope", "$http", "$interval", function($scope, $http, $interval) {
 
 	$scope.setCurrentNote = function(index) {
-		if (index != $scope.curnoteindex) {
-			$scope.curnoteindex = index;
+		if (index != $scope.curnoteindex) {			
 			if ($scope.editmode) {
+				if ($scope.changemade) {
+					
+					$scope.updateNote();
+				}
 				$scope.editmode = false;
 				$scope.unwatch();
 			}
+			$scope.curnoteindex = index;
 		}
 	};
 
 	var t = $scope;
 
+	// GET
 	$scope.retrieveNotes = function() {
 		$http({
 			method: "get",
-			url: "http://localhost:8080/notes"
+			url
+Swipe me to the right
+Swipe me up
+Swipe me down
+: "http://localhost:8080/notes"
 		}).then(function successCallback(response) {
 			t.notes = response.data;
 			if (t.curnoteindex > (t.notes.length - 1)) {
@@ -28,6 +37,7 @@ myApp.controller('NoteController', ["$scope", "$http", "$interval", function($sc
 		});
 	};
 
+	// DELETE
 	$scope.removeNote = function() {
 		$http({
 			method: "delete",
@@ -40,22 +50,32 @@ myApp.controller('NoteController', ["$scope", "$http", "$interval", function($sc
 		});
 	};
 
-	$scope.editNote = function() {
-		$scope.editmode = !$scope.editmode;
 
-		console.log("watch set on " + $scope.notes[$scope.curnoteindex].title);
-			$scope.unwatch = $scope.$watch("notes[curnoteindex].title", function(newval, oldval) {
-				console.log("old val: " + oldval);
-				console.log("new val: " + newval);
+	$scope.editNote = function() {
+		if($scope.editmode) {
+			$scope.unwatch();
+		} else {
+			//console.log("watch set on " + $scope.notes[$scope.curnoteindex].title);
+			$scope.unwatch = $scope.$watch("notes[curnoteindex]", function(newval, oldval) {
+				//console.log("old val: " + oldval);
+				//console.log("new val: " + newval);
 				if(oldval != newval) {
-					console.log("title changed from " + oldval + " to " + newval);
+					console.log("Change on " + newval + ", previously was " + oldval);
+					$scope.changemade = true;
 					$scope.unwatch();
 				}
-			});
+			}, true);
+		}
+
+		$scope.editmode = !$scope.editmode;
+
 	};
 
-	$scope.saveNote = function() {
-		t.editmode = false;
+	// PUT
+	$scope.updateNote = function() {
+		$scope.editmode = false;
+		$scope.changemade = false;
+		console.log("updating note with title  " + $scope.notes[$scope.curnoteindex].title);
 		$http({
 			method: "put",
 			url: "http://localhost:8080/notes/" + t.notes[t.curnoteindex]._id,
@@ -75,6 +95,7 @@ myApp.controller('NoteController', ["$scope", "$http", "$interval", function($sc
 	$scope.retrieveNotes();
 	$scope.curnoteindex = 0;
 	$scope.editmode = false;
+	$scope.changemade = false;
 
 
 	

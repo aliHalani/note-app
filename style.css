@@ -94,6 +94,11 @@ header {
      cursor: initial;
 }
 
+.ng-invalid {
+    border-color: rgba(255, 0, 0, 0.42);
+    background: rgba(255, 0, 0, 0.28);
+}
+
 
 td p {
     margin: 0px 0px 5px;
