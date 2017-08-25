@@ -4,43 +4,55 @@
   <title>Note App</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
   <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
   <script src="app.js"></script>
 </head>
-<body  ng-app="NoteApp" ng-controller="NoteController">
+<body  ng-app="NoteApp" ng-controller="NoteController" layout="column">
   
-<header>Header
-<button ng-click="addNote()">Add Note</button>
-<button id="delete" ng-show="notes.length > 0" ng-click="removeNote()" ng-cloak>Delete Note</button>
-<button id="delete" ng-show="notes.length > 0" ng-click="editNote()" ng-cloak>Edit Note</button>
-<button id="delete" ng-show="editmode" ng-click="updateNote()" ng-cloak>Save Note</button>
-</header>
-<div class="container">
-    <div class="row">
-        <div id="list" class="">
-        	<table id="noteitems">
-        		<tr ng-repeat="note in notes">
-        			<td ng-form>
-                <!--<p class="note" ng-model="note.title" ng-click="setCurrentNote($index)" ng-class="{'active-note': note._id == notes[curnoteindex]._id}" ng-hide="editmode && note._id == notes[curnoteindex]._id"></p>-->
-                <!-- <input type="text" class="notetitleinp" ng-model="note.title" ng-show="editmode && note._id == notes[curnoteindex]._id"></input> -->
-                
-                <input type="text" class="notetitleinp" ng-click="setCurrentNote($index)" ng-readonly="!editmode" ng-model="note.title" ng-class="{'active-note': note._id == notes[curnoteindex]._id && !editmode, 'active-note-edit': note._id == notes[curnoteindex]._id && editmode}" required></input>
-
-
-              </td>
-        		</tr>
-        	</table>
-        </div>
-        <div id="contentdiv" class="col-md-9 no-float">
-          <textarea id="notecontent" ng-readonly="!editmode" ng-model="notes[curnoteindex].content" placeholder="Insert content here..."></textarea>
-        </div>
+  <md-toolbar class="md-whiteframe-1dp">
+    <div class="md-toolbar-tools">
+      <h2>Note App</h2>
+      <md-button class="md-raised" ng-show="notes.length > 0" ng-click="removeNote()" ng-cloak>Delete Note</md-button>
+      <md-button class="md-raised" ng-show="notes.length > 0" ng-click="editNote()" ng-cloak>Edit Note</md-button>
+      <md-button id="save" class="md-raised c-e" ng-show="editmode" ng-click="updateNote()">Save Note</md-button>
     </div>
-</div>
+  </md-toolbar>
 
+  <div class="container" layout="row" flex>
+    <md-sidenav class="md-whiteframe-2dp" md-is-locked-open="true">
+    <md-list flex>
+      <md-list-item class="md-2-line md-whiteframe-2dp" ng-click="setCurrentNote($index)" ng-class="{'active-note': note._id == notes[curnoteindex]._id && !editmode, 'active-note-edit': note._id == notes[curnoteindex]._id && editmode}" ng-repeat="note in notes">
+        <div class="md-list-item-text sample-show-hide">
+          <input ng-model="note.title" ng-readonly="!editmode" ng-model="note.title" ng-class="{'edit-pointer': editmode}"></input>
+          <h4 ng-model="note.content" ng-bind="note.content" md-truncate></h4>
+        </div>
+      </md-list-item>
+    </md-list>
+      <!-- <div id="list" class="">
+        <table id="noteitems">
+          <tr ng-repeat="note in notes">
+            <td ng-form>
+              <input type="text" class="notetitleinp" ng-click="setCurrentNote($index)" ng-readonly="!editmode" ng-model="note.title" ng-class="{'active-note': note._id == notes[curnoteindex]._id && !editmode, 'active-note-edit': note._id == notes[curnoteindex]._id && editmode}" required></input>
+
+
+            </td>
+          </tr>
+        </table>
+      </div> -->
+    </md-sidenav>
+
+
+  <md-content layout flex>
+    <textarea id="notecontent" ng-readonly="!editmode" ng-model="notes[curnoteindex].content" placeholder="Insert content here..."></textarea>
+  </md-content>
+  </div>
 
 </body>
 </html>

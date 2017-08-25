@@ -1,34 +1,13 @@
 html,body,.container {
     height:100%;
+    font-family: 'Roboto', sans-serif;
 }
-.container {
-    display:table;
-    width: 100%;
-    margin-top: -50px;
-    padding: 50px 0 0 0; /*set left/right padding according to needs*/
-    box-sizing: border-box;
-}
+
 header {
     background: green;
     height: 50px;
 }
 
-.row {
-    height: 100%;
-    display: table-row;
-}
-
-.col-md-3 {   
-    background: pink;
-}
-.col-md-9 {
-    background: yellow;  	
-}
-
-.row .no-float {
-  display: table-cell;
-  float: none;
-}
 
 #list {
     width: 300px;
@@ -40,17 +19,14 @@ header {
     border: 2px solid red;
 }
 
-#contentdiv {
-    border: 2px solid blue;
-}
-
-header {
-    border: 2px solid purple;
-}
 
 #noteitems {
     width: 100%;
     text-align: center;
+}
+
+.md-list-item {
+    color: white;
 }
 
 .active-note {
@@ -65,19 +41,14 @@ header {
     cursor: pointer;
 }
 
-#notecontent {
-    display: block;
-    background: none;
-    border: none;
-    position: absolute;
-    border: 2px solid aqua;
-    height: 100%;
-    width: 100%;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
+.lightblue {
+    background-color: lightblue;
 }
+
+.lightgreen {
+    background-color: lightgreen;
+}
+
 
 .notetitleinp {
     width: 100%;
@@ -99,13 +70,79 @@ header {
     background: rgba(255, 0, 0, 0.28);
 }
 
-
-td p {
-    margin: 0px 0px 5px;
+md-toolbar {
+    text-align: center;
 }
 
-@media (min-width: 992px) {
-    .col-md-9 {
-        width: initial;
-    }
+md-sidenav {
+    background: #1e88e5;
+}
+
+#notecontent {
+    width: 100%;
+    border: none;
+    resize: none;
+    box-sizing: border-box;
+    margin: 8px;
+    outline: none;
+}
+
+md-list md-list-item.md-2-line .md-list-item-text h4 {
+    color: rgba(0, 0, 0, 0.54);
+    font-weight: 500;
+}
+
+md-list-item.md-2-line .md-list-item-text h4, md-list-item.md-2-line>.md-no-style .md-list-item-text h4 {
+    font-size: 12px;
+}
+
+md-toolbar:not(.md-menu-toolbar) {
+
+    background: rgb(47, 123, 45);
+
+}
+
+md-list-item {
+    background: white;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-bottom: 8px;
+    border-radius: 3px;
+}
+
+.md-list-item-text input {
+    border: none;
+    background: none;
+    display: block;
+    cursor: pointer;
+}
+
+.edit-pointer {
+    position: relative;
+    z-index: 1;
+    cursor: auto !important;
+    outline: none;
+    border-bottom: solid red 2px;
+}
+
+.ng-enter {
+    transition: opacity 1.5s, margin-left 1s;
+    margin-left: 130%;
+    opacity: 0;
+}
+
+.ng-enter-active {
+  margin-left: 5px;
+  opacity: 1;
+}
+
+.ng-leave {
+  transition: opacity 0.5s, margin-top 0.9s ease 0.35s;
+  margin-top: 0px;
+  opacity: 1;
+}
+
+.ng-leave-active {
+    margin-top: -80px;
+    opacity: 0;
 }

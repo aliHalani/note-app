@@ -1,4 +1,4 @@
-var myApp = angular.module("NoteApp", []);
+var myApp = angular.module("NoteApp", ["ngMaterial", "ngAnimate"]);
 
 myApp.controller('NoteController', ["$scope", "$http", "$interval", function($scope, $http, $interval) {
 
@@ -22,11 +22,7 @@ myApp.controller('NoteController', ["$scope", "$http", "$interval", function($sc
 	$scope.retrieveNotes = function() {
 		$http({
 			method: "get",
-			url
-Swipe me to the right
-Swipe me up
-Swipe me down
-: "http://localhost:8080/notes"
+			url: "http://localhost:8080/notes"
 		}).then(function successCallback(response) {
 			t.notes = response.data;
 			if (t.curnoteindex > (t.notes.length - 1)) {
@@ -39,6 +35,9 @@ Swipe me down
 
 	// DELETE
 	$scope.removeNote = function() {
+		$scope.notes.splice($scope.curnoteindex, 1);
+
+		/*
 		$http({
 			method: "delete",
 			url: "http://localhost:8080/notes/" + t.notes[t.curnoteindex]._id
@@ -47,7 +46,7 @@ Swipe me down
 			console.log("ran retrieve");
 		}, function errorCallback(response) {
 			console.log("error deleting");
-		});
+		});*/
 	};
 
 
