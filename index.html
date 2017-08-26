@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
@@ -29,10 +30,14 @@
     <md-sidenav class="md-whiteframe-2dp" md-is-locked-open="true">
     <md-list flex>
       <md-list-item class="md-2-line md-whiteframe-2dp" ng-click="setCurrentNote($index)" ng-class="{'active-note': note._id == notes[curnoteindex]._id && !editmode, 'active-note-edit': note._id == notes[curnoteindex]._id && editmode}" ng-repeat="note in notes">
-        <div class="md-list-item-text sample-show-hide">
+        <div class="md-list-item-text">
           <input ng-model="note.title" ng-readonly="!editmode" ng-model="note.title" ng-class="{'edit-pointer': editmode}"></input>
           <h4 ng-model="note.content" ng-bind="note.content" md-truncate></h4>
         </div>
+        <div id="item-controls">
+        <i class="material-icons">create</i>
+        <i class="material-icons" ng-click="removeNote($index)">clear</i>
+      </div>
       </md-list-item>
     </md-list>
       <!-- <div id="list" class="">

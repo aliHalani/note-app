@@ -76,6 +76,15 @@ md-toolbar {
 
 md-sidenav {
     background: #1e88e5;
+    overflow-x: hidden;
+}
+
+md-sidenav md-list {
+    padding-bottom: 0px;
+}
+
+md-content {
+    overflow-x: hidden;
 }
 
 #notecontent {
@@ -137,7 +146,7 @@ md-list-item {
 }
 
 .ng-leave {
-  transition: opacity 0.5s, margin-top 0.9s ease 0.35s;
+  transition: opacity 0.5s, margin-top 0.85s ease 0.38s;
   margin-top: 0px;
   opacity: 1;
 }
@@ -145,4 +154,23 @@ md-list-item {
 .ng-leave-active {
     margin-top: -80px;
     opacity: 0;
+}
+
+#item-controls {
+    display: flex;
+}
+
+#item-controls i {
+    position: relative;
+    z-index: 1;
+    opacity: 0.3;
+    outline: none;
+}
+
+#item-controls i:first-child {
+    margin-right: 6px;
+}
+
+md-list-item:hover i {
+    opacity: 1 !important;
 }

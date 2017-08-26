@@ -34,19 +34,16 @@ myApp.controller('NoteController', ["$scope", "$http", "$interval", function($sc
 	};
 
 	// DELETE
-	$scope.removeNote = function() {
-		$scope.notes.splice($scope.curnoteindex, 1);
-
-		/*
+	$scope.removeNote = function(index) {		
 		$http({
 			method: "delete",
-			url: "http://localhost:8080/notes/" + t.notes[t.curnoteindex]._id
+			url: "http://localhost:8080/notes/" + t.notes[index]._id
 		}).then(function successCallback(data) {
-			t.retrieveNotes();
-			console.log("ran retrieve");
+			$scope.notes.splice(index, 1);
+			console.log("delete successful");
 		}, function errorCallback(response) {
 			console.log("error deleting");
-		});*/
+		});
 	};
 
 
