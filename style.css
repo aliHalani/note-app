@@ -41,15 +41,6 @@ header {
     cursor: pointer;
 }
 
-.lightblue {
-    background-color: lightblue;
-}
-
-.lightgreen {
-    background-color: lightgreen;
-}
-
-
 .notetitleinp {
     width: 100%;
     text-align: center;
@@ -65,10 +56,12 @@ header {
      cursor: initial;
 }
 
+/*
 .ng-invalid {
     border-color: rgba(255, 0, 0, 0.42);
     background: rgba(255, 0, 0, 0.28);
 }
+*/
 
 md-toolbar {
     text-align: center;
@@ -106,10 +99,9 @@ md-list-item.md-2-line .md-list-item-text h4, md-list-item.md-2-line>.md-no-styl
 }
 
 md-toolbar:not(.md-menu-toolbar) {
-
-    background: rgb(47, 123, 45);
-
+    background-color: #4CAF50;
 }
+
 
 md-list-item {
     background: white;
@@ -130,8 +122,10 @@ md-list-item {
     position: relative;
     z-index: 1;
     cursor: auto !important;
+}
+
+input {
     outline: none;
-    border-bottom: solid red 2px;
 }
 
 .ng-enter {
@@ -146,7 +140,7 @@ md-list-item {
 }
 
 .ng-leave {
-  transition: opacity 0.5s, margin-top 0.85s ease 0.38s;
+  transition: opacity 0.37s, margin-top 0.75s ease 0.43s;
   margin-top: 0px;
   opacity: 1;
 }
@@ -155,6 +149,7 @@ md-list-item {
     margin-top: -80px;
     opacity: 0;
 }
+
 
 #item-controls {
     display: flex;
@@ -167,10 +162,63 @@ md-list-item {
     outline: none;
 }
 
-#item-controls i:first-child {
+.edit-note:hover, .finish-edit:hover {
+    color: #4CAF50;
+}
+
+.delete-note:hover {
+    color: red;
+}
+
+.edit-note, .finish-edit {
     margin-right: 6px;
 }
 
 md-list-item:hover i {
     opacity: 1 !important;
+}
+
+.edit-note.ng-hide-animate {
+    display: none;
+}
+
+.md-toolbar-tools {
+    text-align: center;
+}
+
+#addwrapper {
+    display: flex;
+    justify-content: center;
+}
+
+#addwrapper i {
+    display: block;
+    font-size: 30px;
+}
+
+#addwrapper .md-button.md-fab:not([disabled]):hover {
+    background-color: #4b9e4e;
+}
+
+#addwrapper button {
+    background-color: #4CAF50;
+    transition: all 1.2s ease 0.1s;
+    opacity: 1;
+}
+
+#addwrapper button.ng-hide {
+    opacity: 0;
+}
+
+#getstarted {
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    opacity: 1;
+    transition: all 0.8s;
+}
+
+#getstarted.ng-hide {
+    margin-top: -104px;
+    opacity: 0;
 }

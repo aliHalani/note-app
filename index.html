@@ -8,49 +8,40 @@
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="app.js"></script>
 </head>
 <body  ng-app="NoteApp" ng-controller="NoteController" layout="column">
   
   <md-toolbar class="md-whiteframe-1dp">
-    <div class="md-toolbar-tools">
-      <h2>Note App</h2>
-      <md-button class="md-raised" ng-show="notes.length > 0" ng-click="removeNote()" ng-cloak>Delete Note</md-button>
-      <md-button class="md-raised" ng-show="notes.length > 0" ng-click="editNote()" ng-cloak>Edit Note</md-button>
-      <md-button id="save" class="md-raised c-e" ng-show="editmode" ng-click="updateNote()">Save Note</md-button>
-    </div>
+      <h3>Note App</h3>
   </md-toolbar>
 
   <div class="container" layout="row" flex>
-    <md-sidenav class="md-whiteframe-2dp" md-is-locked-open="true">
-    <md-list flex>
+    <md-sidenav class="md-whiteframe-2dp" md-is-locked-open="true" layout="column" layout-align="start stretch">
+    <p id="getstarted" ng-show="notes.length == 0">Add a note to get started!</p>
+    <md-list>
       <md-list-item class="md-2-line md-whiteframe-2dp" ng-click="setCurrentNote($index)" ng-class="{'active-note': note._id == notes[curnoteindex]._id && !editmode, 'active-note-edit': note._id == notes[curnoteindex]._id && editmode}" ng-repeat="note in notes">
         <div class="md-list-item-text">
-          <input ng-model="note.title" ng-readonly="!editmode" ng-model="note.title" ng-class="{'edit-pointer': editmode}"></input>
-          <h4 ng-model="note.content" ng-bind="note.content" md-truncate></h4>
+          <input ng-model="note.title" ng-readonly="!editmode || note._id != notes[curnoteindex]._id" ng-model="note.title" ng-class="{'edit-pointer': editmode && note._id == notes[curnoteindex]._id}" placeholder="Untitled"></input>
+          <h4 ng-model="note.content" ng-bind="note.content || 'This note is currently empty.'" md-truncate></h4>
         </div>
         <div id="item-controls">
-        <i class="material-icons">create</i>
-        <i class="material-icons" ng-click="removeNote($index)">clear</i>
+        <i class="material-icons edit-note" ng-hide="editmode && curnoteindex == $index" ng-click="setCurrentNote($index); editNote($index)" title-focus>create</i>
+        <i class="material-icons finish-edit" ng-show="editmode && curnoteindex == $index" ng-click="doneEditing()">done</i>
+        <i class="material-icons delete-note" ng-click="removeNote($index)">clear</i>
       </div>
       </md-list-item>
     </md-list>
-      <!-- <div id="list" class="">
-        <table id="noteitems">
-          <tr ng-repeat="note in notes">
-            <td ng-form>
-              <input type="text" class="notetitleinp" ng-click="setCurrentNote($index)" ng-readonly="!editmode" ng-model="note.title" ng-class="{'active-note': note._id == notes[curnoteindex]._id && !editmode, 'active-note-edit': note._id == notes[curnoteindex]._id && editmode}" required></input>
-
-
-            </td>
-          </tr>
-        </table>
-      </div> -->
+    <div id="addwrapper">
+    <md-button class="md-fab" ng-click="addNote()" ng-show="notes.length > -1">
+      <i class="material-icons">add</i>
+    </md-button>
+  </div>
     </md-sidenav>
 
 

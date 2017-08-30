@@ -69,3 +69,15 @@ app.put("/notes/:id", function(req, res) {
     }
   });
 });
+
+app.post("/notes", function(req, res) {
+  db.collection("notes").insertOne({title: "", content: ""}, function(err, result) {
+    if (err) {
+      console.log("ERROR adding document");
+    } else {
+      console.log("document added successfully");
+      console.log(result.ops[0]._id);
+      res.send(result.ops[0]._id);
+    }
+  });
+});
