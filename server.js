@@ -4,6 +4,9 @@ var mongodb = require("mongodb");
 var cors = require('cors');
 var bodyParser = require('body-parser');
 
+var jwt = require("jsonwebtoken");
+var crypto = require("crypto");
+
 
 var app = express();
 //app.use(bodyParser.json());
@@ -13,6 +16,7 @@ var db;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.set("secretKey", "testsecretkey");
 
 // Connect to the database before starting the application server.
 mongodb.MongoClient.connect("mongodb://localhost/testdata", function (err, database) {
@@ -81,3 +85,52 @@ app.post("/notes", function(req, res) {
     }
   });
 });
+
+
+app.post("/register", function(req, res) {
+  var username = req.body.username;
+  var passwd = req.body.passwd;
+  if (username && passwd) {
+    var salt = crypto.randomBytes(16).toString("hex");
+    var hash = crypto.pbkdf2Sync(passwd, salt, 2048, 32, "sha512").toString("hex");
+    db.collection("users").insertOne({username: username, passwd: [salt, hash].join("$")}, function(err, result) {
+      if (err) {
+        console.log("A user with that name already exists");
+      } else {
+        console.log("User added successfully");
+      }
+    });
+  }
+  res.send();
+});
+
+app.post("/login", function(req, res) {
+  console.log("starting login");
+  var username = req.body.username;
+  var passwd = req.body.passwd;
+  if (username && passwd) {
+    db.collection("users").find({username: username}).toArray(function(err, result) {
+      console.log(result);
+      if (result.length) {
+        var hash = result[0].passwd.split("$")[1];
+        var salt = result[0].passwd.split("$")[0];
+        var comphash = crypto.pbkdf2Sync(passwd, salt, 2048, 32, "sha512").toString("hex");
+        if (comphash == hash) {
+            console.log("Auth successful for " + username);
+            //const token  = jwt.sign({id: result[0]._id, }, app.get("secretKey"), {expiresIn: '1h'});
+            //res.json({status:"success", message"User found", data:{token:token}});
+        } else {
+            console.log("Wrong password for " +  username);
+            res.send();
+        }
+      } else {
+          console.log("No user exists");
+          res.sendStatus(401);
+      }
+    });
+  }
+});
+
+/*
+curl -H "Content-Type: application/json" -X POST http://localhost:8080/login -d "{\"username\":\"test\", \"passwd\":\"test\"}"
+*/
