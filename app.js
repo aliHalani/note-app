@@ -1,4 +1,16 @@
-var myApp = angular.module("NoteApp", ["ngMaterial", "ngAnimate"]);
+var myApp = angular.module("NoteApp", ["ngMaterial", "ngAnimate", "ngRoute"]);
+
+myApp.config(function ($routeProvider) {
+  $routeProvider
+    .when('/login', {
+      templateUrl: '/loginform.html',
+      controller: 'NoteController'
+    })
+    .otherwise({
+      redirectTo: '/loginform.html',
+      controller: 'NoteController'
+    });
+});
 
 myApp.directive("titleFocus", function() {
 	return {

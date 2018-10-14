@@ -17,6 +17,7 @@ var db;
 app.use(cors());
 app.use(bodyParser.json());
 app.set("secretKey", "testsecretkey");
+app.use(express.static(__dirname));
 
 // Connect to the database before starting the application server.
 mongodb.MongoClient.connect("mongodb://localhost/testdata", function (err, database) {
@@ -34,6 +35,10 @@ mongodb.MongoClient.connect("mongodb://localhost/testdata", function (err, datab
     var port = server.address().port;
     console.log("App now running on port", port);
   });
+});
+
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.get("/notes", function(req, res) {
