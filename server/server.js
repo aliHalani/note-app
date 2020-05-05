@@ -20,7 +20,7 @@ app.set("secretKey", "testsecretkey");
 app.use(express.static(__dirname));
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect("mongodb://localhost/testdata", function (err, database) {
+mongodb.MongoClient.connect("mongodb://db/testdata", function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
@@ -38,7 +38,7 @@ mongodb.MongoClient.connect("mongodb://localhost/testdata", function (err, datab
 });
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/html/index.html');
 });
 
 app.get("/notes", function(req, res) {
