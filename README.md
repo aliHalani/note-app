@@ -1,13 +1,19 @@
-Project structure:
+# MEAN Note App
 
-server.js: Node.js program that acts as the backend, and creates a RESTful API using Express for interaction with Angular.js.
+MEAN Note App is a simple note management app built to explore the capability of the MEAN stack.
 
-app.js: Stores angular app and controller.
+The front-end is built with AngularJS, which retrieves data from an API served by Node.js & Express. Application data is stored in a MongoDB database.
 
-index.html: Static Angular.js webpage.
+## Demo
 
+![MEAN Note Demo](docs/demo.gif)
 
+## How to Run
 
-In order to run the app on your local machine in its current state, you must first have a local MongoDB database running with a collection named notes.
+To run the platform, simply clone the repo, navigate into the directory, and run `docker-compose up` (of course, you must have docker installed!).
 
-You must replace "testdata" in line 18 of server.js with the name of your database.
+Navigate to localhost:8080 to see the app in action.
+
+## Notes
+
+Developed and tested on Windows 10 & Ubuntu 20.04.
