@@ -231,3 +231,7 @@ md-list-item:hover i {
     margin-top: -104px;
     opacity: 0;
 }
+
+#notecontent:read-only {
+    background: #f3f3f3;
+}
